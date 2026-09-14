@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Specification-Title: Stalwart Dungeons Worldgen Fix
+Specification-Version: 1.0
+Specification-Vendor: autoforged
+Implementation-Title: stalwart_dungeons_worldgen_fix
+Implementation-Version: 1.0.0
+Implementation-Vendor: autoforged

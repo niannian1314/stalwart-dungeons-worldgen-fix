@@ -1,0 +1,52 @@
+modLoader="lowcodefml"
+loaderVersion="[47,)"
+license="MIT"
+
+# 本 mod 不含任何代码，只有数据包（worldgen + biome_modifier）。
+# 用 lowcodefml 加载器，Forge 不需要 @Mod 主类。
+[[mods]]
+modId="stalwart_dungeons_worldgen_fix"
+version="1.0.0"
+displayName="坚固地牢结构生成修复"
+authors="2046820954@qq.com"
+description='''
+修复 [坚固地牢] Stalwart Dungeons (MCreator mod) 的结构生成问题：
+
+1) 移除 mod 硬编码的随机放置（原版逻辑：每区块 0.6% 概率把生成触发器
+   丢在 y = random(8, WORLD_SURFACE_WG)；下界的高度图是基岩天花板(≈127)，
+   于是触发器会悬空 / 泡在岩浆里 / 顶到天花板，到处是漂浮的灵魂砖小平台）。
+   用 forge:remove_features 把 stalwart_dungeons:awful_dungeons /
+   keeping_castle / end_dungeon 三个 placed_feature 从相关群系里删掉。
+   Forge 的生物群系修改器分相位执行（ADD 先、REMOVE 后），所以不管数据包
+   优先级如何，这一条都一定在 mod 自己添加之后生效，不需要改 mod 的 jar。
+
+2) 用原版 minecraft:jigsaw 结构重新放置 mod 自带的生成触发器
+   stalwart_dungeons:awful_dungeon_spawn：只在下界 灵魂沙峡谷 / 诡异森林，
+   高度 y38~50，间距 spacing 32 / separation 10（比原来稀有很多）。
+   （keeping_castle 与 end_dungeon 按原方案保持不自然生成。）
+
+boss、实体、方块、物品、配方、战利品表、地牢 NBT 都没有动。
+地牢本体仍然用 /place template stalwart_dungeons:awful_dungeon 手动放置，
+boss 祭坛逻辑（手持下界之星右键）不受影响。
+'''
+
+[[dependencies.stalwart_dungeons_worldgen_fix]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.stalwart_dungeons_worldgen_fix]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.stalwart_dungeons_worldgen_fix]]
+    modId="stalwart_dungeons"
+    mandatory=true
+    versionRange="[1.2.8,)"
+    ordering="AFTER"
+    side="BOTH"

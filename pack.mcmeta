@@ -1,0 +1,6 @@
+{
+  "pack": {
+    "pack_format": 15,
+    "description": "Stalwart Dungeons worldgen fix: random y=8~127 spawns removed, awful_dungeon placed by vanilla jigsaw at y38~50"
+  }
+}
